@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Diduu 💗</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Trebuchet MS', sans-serif;
+  background: linear-gradient(135deg, #ffb6d9, #d9b8ff, #ffd6e7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  color: #772b60;
+}
+
+.card {
+  width: 90%;
+  max-width: 480px;
+  padding: 28px 18px;
+  margin: 25px auto;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 12px 40px #9e508055;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: clamp(30px, 8vw, 43px);
+  margin: 5px 0 12px;
+  color: #ed4394;
+  text-shadow: 2px 3px 0 #ffd0e6;
+}
+
+.subtitle {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.heart {
+  font-size: 30px;
+  animation: heartbeat 1s infinite;
+  display: inline-block;
+}
+
+@keyframes heartbeat {
+  50% { transform: scale(1.25); }
+}
+
+/* CAKE */
+.cake-area {
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  position: relative;
+  margin: 10px 0;
+}
+
+.cake {
+  position: relative;
+  width: 210px;
+  height: 140px;
+  animation: cakeIn 1s ease-out;
+}
+
+@keyframes cakeIn {
+  from { transform: translateY(80px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 65px;
+  left: 0;
+  border-radius: 12px 12px 18px 18px;
+  background: #ff83b7;
+  border: 3px solid #f46b9f;
+  bottom: 0;
+}
+
+.layer.middle {
+  width: 88%;
+  left: 6%;
+  height: 53px;
+  bottom: 58px;
+  background: #ffb2cf;
+  border-color: #f48cb5;
+}
+
+.layer.top {
+  width: 72%;
+  left: 14%;
+  height: 43px;
+  bottom: 105px;
+  background: #ffe0ed;
+  border-color: #ffb5d0;
+  border-radius: 13px 13px 9px 9px;
+}
+
+.icing {
+  position: absolute;
+  width: 100%;
+  height: 17px;
+  top: 0;
+  left: 0;
+  background: #fff1f7;
+  border-radius: 50%;
+}
+
+.icing:after {
+  content: " ";
+  position: absolute;
+  top: 7px;
+  left: 10%;
+  width: 80%;
+  height: 18px;
+  background: radial-gradient(circle, #fff1f7 55%, transparent 58%);
+  background-size: 30px 20px;
+}
+
+.candle {
+  position: absolute;
+  width: 12px;
+  height: 43px;
+  background: repeating-linear-gradient(
+    45deg, #fff 0 6px, #ff5b9b 6px 12px
+  );
+  bottom: 145px;
+  left: calc(50% - 6px);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.flame {
+  position: absolute;
+  width: 17px;
+  height: 25px;
+  background: radial-gradient(ellipse at 50% 70%, #fff8a5 0 20%, #ffae27 45%, #ff6a00 75%);
+  border-radius: 50% 50% 45% 45%;
+  bottom: 184px;
+  left: calc(50% - 8.5px);
+  transform-origin: bottom center;
+  animation: flicker .25s infinite alternate;
+  filter: drop-shadow(0 0 9px #ffb52d);
+  z-index: 4;
+}
+
+@keyframes flicker {
+  from { transform: rotate(-5deg) scale(1); }
+  to { transform: rotate(5deg) scale(1.12, .92); }
+}
+
+.flame.out {
+  animation: blowOut .45s forwards;
+}
+
+@keyframes blowOut {
+  to { opacity: 0; transform: translate(25px,-20px) scale(.1); }
+}
+
+.cake-plate {
+  position: absolute;
+  width: 245px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  bottom: -7px;
+  left: -17px;
+  box-shadow: 0 5px 0 #f5a4c5;
+}
+
+button {
+  border: none;
+  background: linear-gradient(135deg, #ff4f9a, #c64bdb);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 14px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px #d95a9c55;
+  transition: transform .2s;
+  margin: 8px;
+}
+
+button:active { transform: scale(.94); }
+
+.message {
+  display: none;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fff0f7;
+  line-height: 1.7;
+  animation: appear .8s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONFETTI */
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.balloon {
+  position: fixed;
+  bottom: -150px;
+  font-size: 55px;
+  animation: floatUp 9s linear infinite;
+  opacity: .7;
+  z-index: 1;
+}
+
+.b1 { left: 5%; animation-delay: 0s; }
+.b2 { right: 6%; animation-delay: 3s; }
+.b3 { left: 78%; animation-delay: 5s; }
+
+@keyframes floatUp {
+  to { transform: translateY(-120vh) rotate(15deg); }
+}
+
+.footer {
+  font-size: 13px;
+  margin-top: 20px;
+  color: #ad6390;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="balloon b1">🎈</div>
+<div class="balloon b2">🎈</div>
+<div class="balloon b3">🎈</div>
+
+<div class="card">
+  <div class="heart">💗</div>
+  <h1>Happy Birthday<br>Diduu! 🎀</h1>
+
+  <p class="subtitle">
+    Wishing you a day full of love,<br>
+    happiness, smiles and magic! ✨
+  </p>
+
+  <div class="cake-area">
+    <div class="cake">
+      <div class="candle"></div>
+      <div class="flame" id="flame"></div>
+      <div class="layer top"><div class="icing"></div></div>
+      <div class="layer middle"><div class="icing"></div></div>
+      <div class="layer"><div class="icing"></div></div>
+      <div class="cake-plate"></div>
+    </div>
+  </div>
+
+  <h2 id="instruction">🎂 Make a wish, Diduu!</h2>
+  <button id="blowBtn" onclick="blowCandles()">
+    🌬️ Blow the Candles
+  </button>
+  <button onclick="celebrate()">
+    🎉 More Confetti!
+  </button>
+
+  <div class="message" id="message">
+    <h2>💖 Lots of Love, Diduu! 💖</h2>
+    May all your dreams come true.<br>
+    May your life always shine as bright<br>
+    as these candles! 🌟<br><br>
+    Keep smiling, keep shining,<br>
+    and keep being amazing! 🥰<br><br>
+    <b>Happy Birthday Once Again! 🎂💕</b>
+  </div>
+
+  <div class="footer">
+    Made with endless love for my Diduu 💗
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+let pieces = [];
+let running = false;
+
+function celebrate() {
+  for (let i = 0; i < 180; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height * .5,
+      size: Math.random() * 8 + 4,
+      speed: Math.random() * 4 + 2,
+      drift: Math.random() * 4 - 2,
+      rotation: Math.random() * 360,
+      spin: Math.random() * 8 - 4,
+      color: ["#ff4f9a", "#ffd166", "#a78bfa",
+              "#70d6ff", "#ff85a1", "#8ee3a1"]
+              [Math.floor(Math.random() * 6)]
+    });
+  }
+  if (!running) {
+    running = true;
+    animate();
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  pieces.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * .65);
+    ctx.restore();
+
+    p.y += p.speed;
+    p.x += p.drift;
+    p.rotation += p.spin;
+  });
+
+  pieces = pieces.filter(p => p.y < canvas.height + 30);
+
+  if (pieces.length > 0) {
+    requestAnimationFrame(animate);
+  } else {
+    running = false;
+  }
+}
+
+let blown = false;
+
+function blowCandles() {
+  if (blown) {
+    document.getElementById("flame").classList.remove("out");
+    document.getElementById("instruction").textContent =
+      "🎂 Make a wish, Diduu!";
+    document.getElementById("blowBtn").textContent =
+      "🌬️ Blow the Candles";
+    document.getElementById("message").style.display = "none";
+    blown = false;
+    return;
+  }
+
+  blown = true;
+  document.getElementById("flame").classList.add("out");
+
+  document.getElementById("instruction").textContent =
+    "✨ Your wish is on its way! ✨";
+  document.getElementById("blowBtn").textContent =
+    "🔁 Light Candles Again";
+
+  setTimeout(() => {
+    document.getElementById("message").style.display = "block";
+    celebrate();
+  }, 500);
+}
+
+celebrate();
+</script>
+
+</body>
+</html>
